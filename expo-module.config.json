@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["ExpoSumsubModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.sumsub.ExpoSumsubModule"]
+  }
+}
