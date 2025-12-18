@@ -1,15 +1,35 @@
-
 import ExpoSumsub from 'expo-sumsub';
-import { ScrollView, Text, View } from 'react-native';
+import { Button, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useEventListener } from "expo";
+
 
 export default function App() {
+
+  useEventListener(ExpoSumsub, "onLog", ({ level, message }) => {
+    console.log(level, message);
+  });
+
+  useEventListener(ExpoSumsub, "onTokenExpired", () => {
+    console.log("onTokenExpired");
+  });
+
+  const handlePress = () => {
+    ExpoSumsub.testEvent()
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
         <Text style={styles.header}>Module API Example</Text>
         <Group name="Functions">
           <Text>{ExpoSumsub.hello()}</Text>
+          <Button
+            onPress={handlePress}
+            title="Learn More"
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"
+          />
         </Group>
       </ScrollView>
     </SafeAreaView>
